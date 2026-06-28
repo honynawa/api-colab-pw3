@@ -115,3 +115,53 @@ router.post("/", async (req, res) => {
     return res.status(201).json(novoColaborador);
 
 });
+
+router.put("/:id", async (req, res) => {
+    const colaboradores = lerDados();
+
+    const index = colaboradores.findIndex(
+        c => c.id == req.params.id
+    );
+
+    if (index === -1) {
+        return res.status(404).json({
+            mensagem: "Colaborador nao encontrado"
+        });
+    }
+
+    const {
+        cargo,
+        email,
+        cep,
+        numero
+    } = req.body;
+
+    colaboradores[index].cargo = cargo || colaboradores[index].cargo;
+    colaboradores[index].email = email || colaboradores[index].email;
+
+    if (cep) {
+        const resposta = await axios.get(
+             `https://viacep.com.br/ws/${cep}/json/`
+        );
+
+        const endereco = resposta.data;
+
+        colaboradores[index].endereco = {
+            logradouro: endereco.logradouro,
+            bairro: endereco.bairro,
+            cidade: endereco.localidade,
+            estado: endereco.uf,
+            numero:
+                numero || colaboradores[index].endereco.numero
+        };
+
+    }
+
+    if (numero) {
+        colaboradores[index].endereco.numero = numero;
+    }
+
+    salvarDados(colaboradores);
+    res.json(colaboradores[index]);
+
+});

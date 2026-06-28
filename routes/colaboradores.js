@@ -16,3 +16,23 @@ function salvarDados(dados) {
         json.stringify(dados, null, 2)
     );
 }
+
+router.get("/", (req, res) => {
+    const colaboradores = lerDados();
+    res.json(colaboradores);
+});
+
+router.get("/cpf/:cpf", (req, res) => {
+    const colaboradores = lerDados();
+    const pessoa = colaboradores.find(
+        c => c.cpf === req.params.cpf
+    );
+
+    if (!pessoa) {
+        return res.status(404).json({
+            mensagem: "CPF nao encontrado"
+        });
+    }
+
+    res.json(pessoa);
+});

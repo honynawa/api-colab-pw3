@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nome": "João Silva",
+    "cargo": "Analista",
+    "cpf": "12345678900",
+    "email": "joao@gmail.com",
+    "endereco": {
+      "logradouro": "Avenida Paulista",
+      "bairro": "Bela Vista",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "numero": "100"
+    },
+    "status": "Ativo"
+  },
+  {
+    "id": 2,
+    "nome": "Maria Oliveira",
+    "cargo": "Desenvolvedora",
+    "cpf": "98765432100",
+    "email": "maria@gmail.com",
+    "endereco": {
+      "logradouro": "Avenida Rio Branco",
+      "bairro": "Centro",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "numero": "250"
+    },
+    "status": "Ativo"
+  }
+]

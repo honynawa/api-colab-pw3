@@ -13,7 +13,7 @@ function lerDados() {
 function salvarDados(dados) {
     fs.writeFileSync(
         arquivo,
-        json.stringify(dados, null, 2)
+        JSON.stringify(dados, null, 2)
     );
 }
 
@@ -61,7 +61,8 @@ router.post("/", async (req, res) => {
         numero
     } = req.body;
 
-    if ( !nome || !cargo || !cpf || email || !cep || !numero) {
+
+    if ( !nome || !cargo || !cpf || !email || !cep || !numero) {
         return res.status(400).json({
             mensagem: "Preencha todos os campos"
         });

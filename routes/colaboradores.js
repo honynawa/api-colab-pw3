@@ -165,3 +165,27 @@ router.put("/:id", async (req, res) => {
     res.json(colaboradores[index]);
 
 });
+
+router.delete("/:id", (req, res) => {
+    const colaboradores = lerDados();
+
+    const index = colaboradores.findIndex(
+        c => c.id == req.params.id
+    );
+
+    if (index === -1) {
+        return res.status(404).json({
+            mensagem: "Colaborador não encontrado"
+        });
+    }
+
+    colaboradores[index].status = "Inativo";
+    salvarDados(colaboradores);
+
+    return res.json({
+        mensagem: "Colaborador desativado com sucesso",
+        colaborador: colaboradores[index]
+    });
+});
+
+module.exports = router;
